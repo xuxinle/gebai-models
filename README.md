@@ -32,4 +32,4 @@ yolo export model=<name>.pt format=onnx imgsz=1280
 
 - 本仓库为嵌套独立仓库：`git add . && git commit` 在本目录内提交，不进主仓库历史
 - 需要远端备份时在本目录 `git remote add origin <url>` 推送；若托管平台对大文件有限制可转 Git LFS
-- `vendor/onnxruntime-node` 具平台相关性（当前为 win32-x64）；跨平台分发时按平台补充对应目录
+- `vendor/onnxruntime-node` 的 npm 包内含全平台原生绑定（darwin/linux/win32 的 x64/arm64），可直接跨平台使用；升级版本时在可联网机器 `npm pack onnxruntime-node` 解包替换
