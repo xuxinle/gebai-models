@@ -17,8 +17,10 @@ vendor/               运行时原生依赖（体积大、网络受限环境难�
 
 ## 使用
 
-- 检测模型：主仓库 `.env` 设 `GEBAI_CV_DETECT_MODEL=<绝对路径>/models/detect/screenparser-best.onnx`
-- GPU sidecar：无需配置——放入 `vendor/node_modules/` 即自动生效（解析顺序见主仓库 `core/cv/sidecar.ts`）
+**整个仓库放到 `{GEBAI_HOME}/models/` 即零配置可用**（dev=项目根目录，二进制=`~/.gebai`）：
+
+- 检测模型：`detect/` 下唯一 `.onnx` 自动发现（`GEBAI_CV_DETECT_MODEL` 可覆盖；放多个时列出候选要求显式指定）
+- GPU sidecar：`vendor/node_modules/` 自动解析（免任何环境变量）
 - OCR（PP-OCR）不在此处：随主仓库 `packages/server/assets/cv-models/` 构建内嵌（既有管线）
 
 ## 更换 / 补充模型
@@ -32,6 +34,6 @@ yolo export model=<name>.pt format=onnx imgsz=1280
 ## 版本管理说明
 
 - 本仓库为嵌套独立仓库（主仓库 `.gitignore` 的 `/models/` 隔离）：`git add . && git commit` 在本目录内提交，不进主仓库历史
-- 远端备份：`https://github.com/xuxinle/gebai-models`（私有）——`*.pt`/`*.onnx` 已走 **Git LFS**（超过 GitHub 100MB 单文件硬限制）；克隆后 `git lfs pull` 拉取权重本体
+- 远端备份：`https://github.com/xuxinle/gebai-models`（私有）——`*.pt`/`*.onnx` 已走 **Git LFS**（超过 GitHub 100MB 单文件硬限制）；克隆后 `git lfs pull` 拉取权重本体（若检出文件为 ~134B 指针文本，说明 LFS 未安装或未 smudge——装好后 `git lfs checkout` 还原）
 - 推送走代理时：`git -c http.proxy=http://127.0.0.1:29290 push origin master`
 - `vendor/node_modules/onnxruntime-node` 的 npm 包内含全平台原生绑定（darwin/linux/win32 的 x64/arm64），可直接跨平台使用；升级版本时在可联网机器 `npm install --prefix <临时目录> onnxruntime-node` 后整体替换 `vendor/node_modules/`
