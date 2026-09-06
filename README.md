@@ -31,6 +31,7 @@ yolo export model=<name>.pt format=onnx imgsz=1280
 
 ## 版本管理说明
 
-- 本仓库为嵌套独立仓库：`git add . && git commit` 在本目录内提交，不进主仓库历史
-- 需要远端备份时在本目录 `git remote add origin <url>` 推送；若托管平台对大文件有限制可转 Git LFS
+- 本仓库为嵌套独立仓库（主仓库 `.gitignore` 的 `/models/` 隔离）：`git add . && git commit` 在本目录内提交，不进主仓库历史
+- 远端备份：`https://github.com/xuxinle/gebai-models`（私有）——`*.pt`/`*.onnx` 已走 **Git LFS**（超过 GitHub 100MB 单文件硬限制）；克隆后 `git lfs pull` 拉取权重本体
+- 推送走代理时：`git -c http.proxy=http://127.0.0.1:29290 push origin master`
 - `vendor/node_modules/onnxruntime-node` 的 npm 包内含全平台原生绑定（darwin/linux/win32 的 x64/arm64），可直接跨平台使用；升级版本时在可联网机器 `npm install --prefix <临时目录> onnxruntime-node` 后整体替换 `vendor/node_modules/`
