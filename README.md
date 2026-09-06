@@ -20,7 +20,7 @@ vendor/               运行时原生依赖（体积大、网络受限环境难�
 **整个仓库放到 `{GEBAI_HOME}/models/` 即零配置可用**（dev=项目根目录，二进制=`~/.gebai`）：
 
 - 检测模型：`detect/` 下唯一 `.onnx` 自动发现（`GEBAI_CV_DETECT_MODEL` 可覆盖；放多个时列出候选要求显式指定）
-- GPU sidecar：`vendor/node_modules/` 自动解析（免任何环境变量）
+- GPU sidecar：`vendor/node_modules/` 自动解析（免任何环境变量；检测与 OCR 推理共用）
 - OCR（PP-OCR）不在此处：随主仓库 `packages/server/assets/cv-models/` 构建内嵌（既有管线）
 
 ## 更换 / 补充模型
