@@ -6,6 +6,10 @@
 ## 目录约定
 
 ```
+ocr/                  OCR（PP-OCRv4 mobile）三件套（GEBAI_CV_MODELS_DIR 缺省目录；
+  det.onnx             文本检测 ONNX（~4.7MB，RapidOCR 托管，Apache-2.0）
+  rec.onnx             文本识别 ONNX（~10.9MB；字典内嵌于 character 元数据）
+  dict.txt             CTC 字符表（从 rec 元数据提取，可手工替换）
 detect/               检测模型（GEBAI_CV_DETECT_MODEL 指向此处的 ONNX）
   screenparser-best.pt     训练权重源文件（ScreenParser，docling-project，Apache-2.0）
   screenparser-best.onnx   运行时 ONNX（yolo export format=onnx imgsz=1280 导出；55 类 UI 组件）
@@ -20,8 +24,8 @@ vendor/               运行时原生依赖（体积大、网络受限环境难�
 **整个仓库放到 `{GEBAI_HOME}/models/` 即零配置可用**（dev=项目根目录，二进制=`~/.gebai`）：
 
 - 检测模型：`detect/` 下唯一 `.onnx` 自动发现（`GEBAI_CV_DETECT_MODEL` 可覆盖；放多个时列出候选要求显式指定）
+- OCR 模型：`ocr/` 三件套自动生效（解析顺序 `GEBAI_CV_MODELS_DIR` → 二进制内嵌物化 → 本目录），构建时缺失则自动下载到此处
 - GPU sidecar：`vendor/node_modules/` 自动解析（免任何环境变量；检测与 OCR 推理共用）
-- OCR（PP-OCR）不在此处：随主仓库 `packages/server/assets/cv-models/` 构建内嵌（既有管线）
 
 ## 更换 / 补充模型
 
