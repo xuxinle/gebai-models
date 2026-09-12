@@ -1,2 +1,11 @@
-# 单二进制形态运行时释放的 CV 资产（ort wasm 产物、sidecar 驱动、版本 marker）——非本仓库资产
+# 单二进制形态运行时释放的 CV 运行时（ort wasm 产物 + sidecar 驱动）与版本 marker —— 非本仓库资产
 vendor/cv/
+vendor/cv.version
+
+# 下载/安装副产物（在主仓库运行 bun run resources:download 且目标指向本目录时产生）
+*.part
+vendor/package.json
+vendor/bun.lock
+vendor/package-lock.json
+vendor/node_modules/.package-lock.json
+vendor/node_modules/.bin/
