@@ -28,6 +28,19 @@ vendor/                      运行时依赖（非模型资产）
                              等 16 包，npm 布局——依赖经 node 标准向上查找天然可用）
 ```
 
+## 获取资源
+
+三种等价方式（任选其一，产物目录结构相同）：
+
+1. **主仓库脚本（推荐）**：`bun run resources:download` —— 按主仓库清单 `scripts/resources.manifest.json`
+   逐文件下载（modelscope / hf-mirror / huggingface 多源轮换、断点续传、size/sha256 校验），
+   并按本仓库相同结构铺开到 `{GEBAI_HOME}/resources/`；`--check` 只校验现状、`--only` 限定条目、
+   `--source` 指定来源优先级、`--skip-vendor` 跳过 vendor 依赖
+2. **克隆本仓库**：整仓放到 `{GEBAI_HOME}/resources/`（权重走 Git LFS，克隆后 `git lfs pull`）
+3. **手工放置**：按下方目录结构自行放入（文件名与目录固定）
+
+下载清单与脚本属主仓库（`scripts/`），本仓库只存资源本体。
+
 ## 使用
 
 **整个仓库放到 `{GEBAI_HOME}/resources/` 即零配置可用**（dev=项目根目录，二进制=`~/.gebai`）：
