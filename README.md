@@ -73,7 +73,10 @@ yolo export model=<name>.pt format=onnx imgsz=1280
 - 远端：`https://github.com/xuxinle/gebai-resources`（公开）——`*.pt`/`*.onnx` 已走 **Git LFS**
   （超过 GitHub 100MB 单文件硬限制）；克隆后 `git lfs pull` 拉取权重本体（若检出文件为 ~134B
   指针文本，说明 LFS 未安装或未 smudge——装好后 `git lfs checkout` 还原）
-- 推送走代理时：`git -c http.proxy=http://127.0.0.1:29290 push origin master`
+- 推送通道：本仓库是独立仓库，git 配置不继承主仓库——主仓库可推而本仓库 `Couldn't connect to server`
+  时，在本目录单独配 URL 重写走 GitHub 的 SSH-over-443 通道（https 直连不可达时适用）：
+  `git config "url.ssh://git@ssh.github.com:443/.insteadof" "https://github.com/"`
+  连通性自检 `git ls-remote origin`；LFS 对象同经此通道收发（`git lfs fetch origin master` 可验证）
 - `vendor/node_modules/onnxruntime-node` 的 npm 包内含全平台原生绑定（darwin/linux/win32 的
   x64/arm64），可直接跨平台使用；升级版本时在可联网机器
   `npm install --prefix <临时目录> onnxruntime-node` 后整体替换 `vendor/node_modules/`
