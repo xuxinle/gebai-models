@@ -70,7 +70,7 @@ yolo export model=<name>.pt format=onnx imgsz=1280
 
 - 本仓库为嵌套独立仓库（主仓库 `.gitignore` 的 `/resources/` 隔离）：`git add . && git commit`
   在本目录内提交，不进主仓库历史
-- 远端备份：`https://github.com/xuxinle/gebai-models`（私有）——`*.pt`/`*.onnx` 已走 **Git LFS**
+- 远端：`https://github.com/xuxinle/gebai-resources`（公开）——`*.pt`/`*.onnx` 已走 **Git LFS**
   （超过 GitHub 100MB 单文件硬限制）；克隆后 `git lfs pull` 拉取权重本体（若检出文件为 ~134B
   指针文本，说明 LFS 未安装或未 smudge——装好后 `git lfs checkout` 还原）
 - 推送走代理时：`git -c http.proxy=http://127.0.0.1:29290 push origin master`
