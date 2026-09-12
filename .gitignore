@@ -1,0 +1,2 @@
+# 单二进制形态运行时释放的 CV 资产（ort wasm 产物、sidecar 驱动、版本 marker）——非本仓库资产
+vendor/cv/
